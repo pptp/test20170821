@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "noImplicitAny": false,
+    "removeComments": true,
+    "module": "commonjs",
+    "target": "es6",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+
+    "types": [
+      "node",
+      "reflect-metadata"
+    ],
+
+    "lib": [
+      "es6",
+      "dom"
+    ],
+
+    "baseUrl": "./",
+    "paths": {
+      "src": ["src"],
+      "node_modules": ["node_modules"]
+    }
+  }
+}
