@@ -25,7 +25,7 @@ class CountriesController extends AbstractController {
   getFlag(countryName: string): string {
     const countryCode = countriesObject[countryName];
     if (countryCode) {
-      return `/static/flags/${countryCode}.png`;
+      return `/flags/${countryCode}.png`;
     } else {
       return null;
     }
@@ -41,7 +41,7 @@ class CountriesController extends AbstractController {
     /*
       Some kind of simple middleware to inject our flag and for caching in future.
     */
-    const foundCountries = await app.fetchCountry(search);
+    const foundCountries = (await app.fetchCountry(search)) || [];
 
     const result = foundCountries.map((foundCountry: ICountry): IResponseCountry => {
       const responseCountry = <IResponseCountry>Object.assign({}, foundCountry);

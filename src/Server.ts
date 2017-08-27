@@ -1,6 +1,7 @@
 import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import * as methodOverride from 'method-override';
+import * as path from 'path';
 
 import { IController } from './interfaces/IController';
 
@@ -9,14 +10,22 @@ export class Server {
 
   constructor() {
     this.app = express();
+    this.config();
   }
 
   protected config() {
     const { app } = this;
 
+    app.use(function(req, res, next) {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+      next();
+    });
+
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
     app.use(methodOverride());
+
 
     app.use((err: any,
         req: express.Request,
@@ -28,7 +37,7 @@ export class Server {
       }
     );
 
-    app.use(express.static('./static'));
+    app.use(express.static(path.join(__dirname, 'static')));
   }
 
   public registerController(controller: IController) {
@@ -39,8 +48,6 @@ export class Server {
   }
 
   public run() {
-    this.config();
-
     this.app.listen(8080);
   }
 }

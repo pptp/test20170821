@@ -24,7 +24,8 @@ module.exports = {
   target: 'node',
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name].js'
+    filename: '[name].js',
+    publicPath: 'static/',
   },
   node: {
     __dirname: false
